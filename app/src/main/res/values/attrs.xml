@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBar">
+        <!--最小值-->
+        <attr name="min" format="integer"></attr>
+        <!--最大值-->
+        <attr name="max" format="integer"></attr>
+        <!--后缀-->
+        <attr name="suffix" format="string|reference"></attr>
+        <!--后缀字体大小-->
+        <attr name="suffixTextSize" format="dimension|reference"></attr>
+        <!--后缀字体颜色-->
+        <attr name="suffixTextColor" format="color|reference"></attr>
+        <!--后缀保留小数点后几位-->
+        <attr name="suffixScale" format="integer"></attr>
+        <!--进度颜色-->
+        <attr name="progressColor" format="color|reference"></attr>
+        <!--初始颜色-->
+        <attr name="backgroundColor" format="color|reference"></attr>
+        <!--进度条高度-->
+        <attr name="progressHeigh" format="dimension|reference"></attr>
+        <!--进度-->
+        <attr name="progress" format="integer"></attr>
+        <!--后缀和进度条的间距-->
+        <attr name="textPadding" format="dimension|reference"></attr>
+        <!--滑块的半径-->
+        <attr name="thumbRadius" format="dimension|reference"></attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.amxc.jc.admin.coustomview.MainActivity">
+
+
+    <com.amxc.jc.admin.coustomview.SeekBar
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:max="30"
+        app:min="1"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:progress="0"
+        app:progressHeigh="6dp"
+        app:suffix="天"
+        app:suffixScale="0"
+        app:suffixTextSize="14sp"
+        app:textPadding="5dp"
+        app:thumbRadius="12dp" />
+
+</android.support.constraint.ConstraintLayout>
