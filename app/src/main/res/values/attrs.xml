@@ -2,28 +2,28 @@
 <resources>
     <declare-styleable name="SeekBar">
         <!--最小值-->
-        <attr name="min" format="integer"></attr>
+        <attr name="min" format="integer" />
         <!--最大值-->
-        <attr name="max" format="integer"></attr>
+        <attr name="max" format="integer" />
         <!--后缀-->
-        <attr name="suffix" format="string|reference"></attr>
+        <attr name="seekSuffix" format="string|reference" />
         <!--后缀字体大小-->
-        <attr name="suffixTextSize" format="dimension|reference"></attr>
+        <attr name="seekSuffixTextSize" format="dimension|reference" />
         <!--后缀字体颜色-->
-        <attr name="suffixTextColor" format="color|reference"></attr>
+        <attr name="seekSuffixTextColor" format="color|reference" />
         <!--后缀保留小数点后几位-->
-        <attr name="suffixScale" format="integer"></attr>
+        <attr name="seekSuffixScale" format="integer" />
         <!--进度颜色-->
-        <attr name="progressColor" format="color|reference"></attr>
+        <attr name="progressColor" format="color|reference" />
         <!--初始颜色-->
-        <attr name="backgroundColor" format="color|reference"></attr>
+        <attr name="backgroundColor" format="color|reference" />
         <!--进度条高度-->
-        <attr name="progressHeigh" format="dimension|reference"></attr>
+        <attr name="progressHeigh" format="dimension|reference" />
         <!--进度-->
-        <attr name="progress" format="integer"></attr>
+        <attr name="progress" format="integer" />
         <!--后缀和进度条的间距-->
-        <attr name="textPadding" format="dimension|reference"></attr>
+        <attr name="textPadding" format="dimension|reference" />
         <!--滑块的半径-->
-        <attr name="thumbRadius" format="dimension|reference"></attr>
+        <attr name="thumbRadius" format="dimension|reference" />
     </declare-styleable>
 </resources>

@@ -16,6 +16,7 @@ import android.view.View;
 
 import java.text.NumberFormat;
 
+
 /**
  * Created by admin on 2018/1/16.
  */
@@ -48,6 +49,8 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
     private int realProgress;
     private float progressToTop;
 
+    private OnSeekBarChangeListener onSeekBarChangeListener;
+
     private GestureDetector gestureDetector;
 
 
@@ -64,22 +67,172 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SeekBar);
         min = typedArray.getInt(R.styleable.SeekBar_min, 0);
         max = typedArray.getInt(R.styleable.SeekBar_max, 100);
-        suffix = typedArray.getString(R.styleable.SeekBar_suffix);
+        suffix = typedArray.getString(R.styleable.SeekBar_seekSuffix);
         progressColor = typedArray.getColor(R.styleable.SeekBar_progressColor, getResources().getColor(R.color.colorAccent));
         backgroundColor = typedArray.getColor(R.styleable.SeekBar_backgroundColor, getResources().getColor(R.color.c2));
         progressHeigh = typedArray.getDimension(R.styleable.SeekBar_progressHeigh, 10);
         progress = typedArray.getInt(R.styleable.SeekBar_progress, 0);
-        suffixTextSize = typedArray.getDimension(R.styleable.SeekBar_suffixTextSize, 20);
-        suffixTextColor = typedArray.getColor(R.styleable.SeekBar_suffixTextColor, getResources().getColor(R.color.black));
+        suffixTextSize = typedArray.getDimension(R.styleable.SeekBar_seekSuffixTextSize, 20);
+        suffixTextColor = typedArray.getColor(R.styleable.SeekBar_seekSuffixTextColor, getResources().getColor(R.color.black));
         textPadding = typedArray.getDimension(R.styleable.SeekBar_textPadding, 0);
         thumbRadius = typedArray.getDimension(R.styleable.SeekBar_thumbRadius, 0);
-        suffixScale = typedArray.getInt(R.styleable.SeekBar_suffixScale, 2);
+        suffixScale = typedArray.getInt(R.styleable.SeekBar_seekSuffixScale, 2);
         if (suffixScale < 0) {
             suffixScale = 2;
         }
         typedArray.recycle();
         gestureDetector = new GestureDetector(context, this);
         initPaint();
+    }
+
+    public OnSeekBarChangeListener getOnSeekBarChangeListener() {
+        return onSeekBarChangeListener;
+    }
+
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener onSeekBarChangeListener) {
+        this.onSeekBarChangeListener = onSeekBarChangeListener;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    public int getProgressColor() {
+        return progressColor;
+    }
+
+    public void setProgressColor(int progressColor) {
+        this.progressColor = progressColor;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    @Override
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public float getProgressHeigh() {
+        return progressHeigh;
+    }
+
+    public void setProgressHeigh(float progressHeigh) {
+        this.progressHeigh = progressHeigh;
+    }
+
+    public float getSuffixTextSize() {
+        return suffixTextSize;
+    }
+
+    public void setSuffixTextSize(float suffixTextSize) {
+        this.suffixTextSize = suffixTextSize;
+    }
+
+    public int getSuffixTextColor() {
+        return suffixTextColor;
+    }
+
+    public void setSuffixTextColor(int suffixTextColor) {
+        this.suffixTextColor = suffixTextColor;
+    }
+
+    public float getTextPadding() {
+        return textPadding;
+    }
+
+    public void setTextPadding(float textPadding) {
+        this.textPadding = textPadding;
+    }
+
+    public int getSuffixScale() {
+        return suffixScale;
+    }
+
+    public void setSuffixScale(int suffixScale) {
+        this.suffixScale = suffixScale;
+    }
+
+    public Paint getmProgressPaint() {
+        return mProgressPaint;
+    }
+
+    public void setmProgressPaint(Paint mProgressPaint) {
+        this.mProgressPaint = mProgressPaint;
+    }
+
+    public Paint getmBgPaint() {
+        return mBgPaint;
+    }
+
+    public void setmBgPaint(Paint mBgPaint) {
+        this.mBgPaint = mBgPaint;
+    }
+
+    public Paint getmSuffixTextPaint() {
+        return mSuffixTextPaint;
+    }
+
+    public void setmSuffixTextPaint(Paint mSuffixTextPaint) {
+        this.mSuffixTextPaint = mSuffixTextPaint;
+    }
+
+    public Paint getThumbPaint() {
+        return thumbPaint;
+    }
+
+    public void setThumbPaint(Paint thumbPaint) {
+        this.thumbPaint = thumbPaint;
+    }
+
+    public Paint getThumbCoverPaint() {
+        return thumbCoverPaint;
+    }
+
+    public void setThumbCoverPaint(Paint thumbCoverPaint) {
+        this.thumbCoverPaint = thumbCoverPaint;
+    }
+
+    public float getThumbRadius() {
+        return thumbRadius;
+    }
+
+    public void setThumbRadius(float thumbRadius) {
+        this.thumbRadius = thumbRadius;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+        postInvalidate();
+    }
+
+    public void setRealProgress(int realProgress) {
+        this.realProgress = realProgress;
     }
 
     @Override
@@ -125,6 +278,11 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
 
         canvas.drawCircle(thumbWidth, (float) (progressToTop + Arith.div(progressHeigh, 2)),
                 thumbRadius - 5, thumbCoverPaint);
+        float thumb = 20f;
+        canvas.translate(thumbWidth, (float) (progressToTop + Arith.div(progressHeigh, 2)));
+        canvas.rotate(45);
+        RectF rectF = new RectF(0 - thumb / 2, 0 - thumb / 2, 0 + thumb / 2, thumb / 2);
+        canvas.drawRect(rectF, thumbPaint);
     }
 
     private float getRealProgress() {
@@ -134,7 +292,11 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
     }
 
     private int withToProgress(float progressWidth) {
-        return (int) Arith.mul(Arith.div(progressWidth, mWidth), 100);
+        progress = (int) Arith.mul(Arith.div(progressWidth, mWidth), 100);
+        if (onSeekBarChangeListener != null) {
+            onSeekBarChangeListener.onProgressChange(this, progress);
+        }
+        return progress;
     }
 
     private float progressToWith(float progress) {
@@ -166,7 +328,7 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
 
         thumbPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         thumbPaint.setStyle(Paint.Style.FILL);
-        thumbPaint.setColor(getResources().getColor(R.color.colorAccent));
+        thumbPaint.setColor(progressColor);
 
         thumbCoverPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         thumbCoverPaint.setStyle(Paint.Style.FILL);
@@ -294,5 +456,9 @@ public class SeekBar extends View implements GestureDetector.OnGestureListener {
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         Log.d(TAG, "onFling");
         return true;
+    }
+
+    public interface OnSeekBarChangeListener {
+        void onProgressChange(SeekBar seekBar, int progress);
     }
 }
